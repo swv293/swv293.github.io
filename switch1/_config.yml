@@ -1,17 +1,12 @@
-# Dependencies
-markdown:         redcarpet
-highlighter:      pygments
-
 # Permalinks
 permalink:           pretty
-relative_permalinks: true
 
 # Setup
 title:               Swami Venkatesh
 tagline:             Swami's Attempt At A Data Science Blog
 url:                 http://swv293.github.io
 paginate:            2
-baseurl:             /
+baseurl:             ""
 
 # Assets
 #
