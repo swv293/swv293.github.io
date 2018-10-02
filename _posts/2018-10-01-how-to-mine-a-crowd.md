@@ -3,10 +3,10 @@ layout: post
 title: How to mine a crowd..
 ---
 ### Takaways from Exploratory Data Analysis using NYC MTA Turnstile data
-![NYC crowds][/images/pexels-photo-1112107.jpeg]
+![NYC crowds](/images/pexels-photo-1112107.jpeg)
 Photo by Jamie McInall from Pexels
 
-## NYC MTA turnstile data 
+## NYC MTA turnstile data
 Hyde is a brazen two-column [Jekyll](http://jekyllrb.com) theme that pairs a prominent sidebar with uncomplicated content. It's based on [Poole](http://getpoole.com), the Jekyll butler.
 
 ### Built on Poole
