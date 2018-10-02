@@ -39,7 +39,7 @@ We identified the zipcodes around our top stations and mapped the income distrib
 ![income distribution](images/Income_map.png)
 GPS locations of the income distribution. Darker circles indicate higher incomes.
 
-We also devised a simple algorithm that mapped both footfall and income data into a single function, adding weights to each component so that we could tweak the recommendations towards either income heavy stations or footfall heavy stations, based on the client's preference.
+We also devised a simple algorithm that mapped both footfall and income data into a single function, adding weights to each component so that we could tweak the recommendations towards either income heavy stations or footfall heavy stations, based on the client's preference. For more on that checkout my cohort-mate and project team member Tim Bowlings's blog [here](https://extraordinaryleastsquares.com/data-science/).
 
 ![income and footfall](images/Rank_Map.png)
 GPS map of top ranked MTA Stations based on the combined income and turnstile data.
@@ -54,6 +54,15 @@ GPS map of top ranked MTA Stations based on the combined income and turnstile da
 The turnstile data was separated by the days of the week and aggregated over the entire period of 13 weeks to give rise to the distribution of exits over the days of the week for selected stations with the shadow being the 95% confidence interval around each line plot.
 
 Note: Wednesday traffic seem to be fluctuating more than any other day for the period we analyzed.
+
+### Tools used for the project
+
+* Python : for most of the cleaning and analysis
+* Pandas dataframes
+* Matplotlib
+* Seaborn
+* Tableau
+* GeoPy
 
 ### Next Steps
 
