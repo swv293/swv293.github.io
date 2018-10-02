@@ -36,7 +36,7 @@ WYWT is looking to expand on its donor base through the street campaign, so we d
 
 We identified the zipcodes around our top stations and mapped the income distribution around these locations.
 
-![income distribution](images/Income_map.png.png)
+![income distribution](images/Income_map.png)
 GPS locations of the income distribution. Darker circles indicate higher incomes.
 
 We also devised a simple algorithm that mapped both footfall and income data into a single function, adding weights to each component so that we could tweak the recommendations towards either income heavy stations or footfall heavy stations, based on the client's preference.
@@ -51,7 +51,7 @@ GPS map of top ranked MTA Stations based on the combined income and turnstile da
 * Mondays and Fridays are the best days for positioning street teams at the exits of the stations to maximize their impact as the ridership peaks on those days.
 
 ![Exits and the day of the week](image/exits_week.png)
-The turnstile data was separated by the days of the week and aggregated over the entire period of 13 weeks to give rise to the distribution of exits over the days of the week for selected stations with the shadow being the 95% confidence interval around each line plot. Note: Wednesday traffic seem to be fluctuating more than any other day for the period we analyzed. 
+The turnstile data was separated by the days of the week and aggregated over the entire period of 13 weeks to give rise to the distribution of exits over the days of the week for selected stations with the shadow being the 95% confidence interval around each line plot. Note: Wednesday traffic seem to be fluctuating more than any other day for the period we analyzed.
 
 ### Next Steps
 
