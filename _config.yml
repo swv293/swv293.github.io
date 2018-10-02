@@ -1,6 +1,6 @@
 # Dependencies
 markdown:         redcarpet
-highlighter:      pygments
+highlighter:      rouge
 
 # Permalinks
 permalink:           pretty
@@ -36,7 +36,7 @@ gems:
   - jekyll-gist
 
 # Page List
-pages_list:       
+pages_list:
   About: '/about'
   Archive: '/archive'
   Feed: '/index.html'
