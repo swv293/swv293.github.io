@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Swami Venkatesh &middot; Swami's Attempt At A Data Science Blog
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class = "theme-base-08 layout-reverse">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Swami Venkatesh
+        </a>
+      </h1>
+      <p class="lead"></p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item active" href="/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">About</a>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/swv293">GitHub project</a>
+      <span class="sidebar-nav-item">Currently v2.0.0</span>
+    </nav>
+
+    <p>&copy; 2018. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="posts">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2018/10/01/how-to-mine-a-crowd/">
+        How to mine a crowd..
+      </a>
+    </h1>
+
+    <span class="post-date">01 Oct 2018</span>
+
+    <h3 id="takaways-from-exploratory-data-analysis-using-nyc-mta-turnstile-data">Takaways from Exploratory Data Analysis using NYC MTA Turnstile data</h3>
+<p><img src="/images/pexels-photo-1112107.jpeg" alt="NYC crowds" />
+Photo by Jamie McInall from Pexels</p>
+
+<p>Week one of the <a href="https://www.thisismetis.com/data-science-bootcamps">Metis Data Science Bootcamp</a> saw us wade neck deep into analyzing data - in its full glory, and I kid you not - it was messy! But the final outcome was something, which as a rank newcomer - I was proud of!</p>
+
+<p>This project was designed such that we would face the rigors of understanding the data, clean it and analyze it to come up with recommendations for a fictional client. Women Yes Women Tech (WYWT) International wanted us to analyze the <a href="http://web.mta.info/developers/turnstile.html">MTA Turnstile data</a> to suggest where to place their street team of volunteers to maximize sign-ups for their cause and increase attendance in their summer gala.</p>
+
+<p>Now, why MTA turnstile data, you may ask.</p>
+
+<h3 id="nyc-mta-turnstile-data">NYC MTA turnstile data</h3>
+
+<blockquote>
+  <p>In 2016, average weekday subway ridership was 5.7 million, the highest since 1948. Annual ridership was 1.757 billion.</p>
+</blockquote>
+
+<blockquote>
+  <p><a href="http://web.mta.info/nyct/facts/ffsubway.htm">MTA info</a></p>
+</blockquote>
+
+<p>Given this ridership, it should come as no surprise that the data from the turnstiles - that register the traffic through the New York subway system at each entrance of each station every four hours - would be ideal for our analysis. Given the rather <a href="https://www.surveygizmo.com/resources/blog/survey-response-rates/">low response rates (10-12%) for external surveys</a>, identifying stations with the highest footfalls could yield a good conversion rate, i.e, more donors to WYWT’s cause.</p>
+
+<p>Given that WYWT would hold their gala in summer, we pulled out the turnstile data for the months preceding it, from March to May and used it for our analysis.</p>
+
+<p>Based on our cleaned-up data (maybe I should go over how we did all that in another blog post?), we came up with a list of top stations with the highest footfalls. We focussed on the number of exits from any given station, as we inferred that people would be more amenable to chatting with volunteers at their destination.</p>
+
+<p><img src="images/stations_by_exits.png" alt="top stations" />
+Top MTA stations based on the turnstile Data</p>
+
+<h3 id="the-income-angle">The income angle</h3>
+
+<p><img src="images/Exit_map.png" alt="distribution" />
+GPS locations of the top MTA stations that we selected. Larger circles indicate more foot falls.</p>
+
+<p>WYWT is looking to expand on its donor base through the street campaign, so we decided to add income data from Kaggle (<a href="https://www.kaggle.com/goldenoakresearch/us-household-income-stats-geo-locations">household income data</a>), to supplement the footfall data and get more meaning into our analysis.</p>
+
+<p>We identified the zipcodes around our top stations and mapped the income distribution around these locations.</p>
+
+<p><img src="images/Income_map.png" alt="income distribution" />
+GPS locations of the income distribution. Darker circles indicate higher incomes.</p>
+
+<p>We also devised a simple algorithm that mapped both footfall and income data into a single function, adding weights to each component so that we could tweak the recommendations towards either income heavy stations or footfall heavy stations, based on the client’s preference.</p>
+
+<p><img src="images/Rank_Map.png" alt="income and footfall" />
+GPS map of top ranked MTA Stations based on the combined income and turnstile data.</p>
+
+<h3 id="our-recommendations">Our recommendations</h3>
+
+<ul>
+  <li>
+    <p>List of top fifty stations based on our combined income and footfall ranking system.</p>
+  </li>
+  <li>
+    <p>Mondays and Fridays are the best days for positioning street teams at the exits of the stations to maximize their impact as the ridership peaks on those days.</p>
+  </li>
+</ul>
+
+<p><img src="images/exits_week.png" alt="Exits and the day of the week" />
+The turnstile data was separated by the days of the week and aggregated over the entire period of 13 weeks to give rise to the distribution of exits over the days of the week for selected stations with the shadow being the 95% confidence interval around each line plot.</p>
+
+<p>Note: Wednesday traffic seem to be fluctuating more than any other day for the period we analyzed.</p>
+
+<h3 id="next-steps">Next Steps</h3>
+
+<p>Off to week two and web scraping! Keep an eye on this blog for more updates in the coming weeks! I leave you with some interesting quotes on data from some truly learned people!</p>
+
+<h3 id="interesting-quotes-on-data">Interesting Quotes on Data</h3>
+
+<blockquote>
+  <p>“It is a capital mistake to theorize before one has data.”- Arthur Conan Doyle, Author of Sherlock Holmes</p>
+</blockquote>
+
+<blockquote>
+  <p>“Torture the data, and it will confess to anything.” – Ronald Coase, winner of the Nobel Prize in Economics</p>
+</blockquote>
+
+<blockquote>
+  <p>The world is one big data problem.”- Andrew McAfee, MIT scientist</p>
+</blockquote>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2018/10/01/health-and-AI/">
+        Artificially Reimagining Healthcare
+      </a>
+    </h1>
+
+    <span class="post-date">01 Oct 2018</span>
+
+    <h3 id="my-personal-journey-towards-data-science">My personal journey towards Data Science.</h3>
+
+<p>A Molecular Biologist and Biochemistry PhD by training, I have over a decade of research experience under my belt.</p>
+
+<p>However, classical molecular biology has, in recent years, evolved technologically, to generate terabytes of digitized data – resulting from genomics and proteomics experiments.</p>
+
+<p>About five years ago, I diversified from my core field into genomics and proteomics, which necessarily involved data analysis. I began learning the R language and using it to analyze data sets. My foray into data analysis led to my appreciation of the appeal and power of using R not just to operate on datasets popularly termed as ‘big data’, but to also extract meaningful, statistically-significant analysis.</p>
+
+<p>I published my research results in the journal <a href="https://www.nature.com/articles/nature11326">Nature</a>, and followed it up with another publication in <a href="https://www.nature.com/articles/ncomms13610">Nature Communications</a>. These experiences got me interested in learning how to harness the power of data analysis, particularly with the advent of AI techniques in understanding biological data.  And this is just data academic research.</p>
+
+<p>Currently, the healthcare industry offers a treasure trove of data in the form of patient database - measurements, images and diagnostic tests - that could amount to 80MB data per person each year. Add to it, fitness data from iPhones and fitbits, government websites (CDC and FDA), insurance claims and other health records – that is a mind-boggling amount of data to sift through, analyze and make sense of.</p>
+
+<p>Expert estimates peg the <a href="http://fortune.com/2018/03/19/big-data-digital-health-tech/">health data analytics industry to touch $24 billion by the year 2020</a>. And with good reason – such investments in the health care industry will decrease healthcare costs for the patient and improve overall well-being of the population as well! Besides, this will bode well for businesses too.</p>
+
+<p>It is evident from literature survey that supervised and unsupervised machine learning are widely popular and being applied to <a href="https://www.nature.com/articles/d41586-018-03358-3">categorize the vast plethora of viruses</a> and in <a href="https://www.sciencedaily.com/releases/2018/09/180917111642.htm">grading tumors based on their molecular signatures</a>. But this is just the beginning.</p>
+
+<p>This data-driven transformation is not restricted to biology or the health care industry alone. The broad scope of inquiry using data – particularly continuous streams using IOT – will place data analysis as a sought-after skill set.</p>
+
+  </div>
+  
+</div>
+
+<div class="pagination">
+  
+    <a class="pagination-item older" href="/page2">Older</a>
+  
+  
+    <span class="pagination-item newer">Newer</span>
+  
+</div>
+    </div>
+
+  </body>
+</html>
