@@ -6,7 +6,7 @@ title: How to mine a crowd..
 ![NYC crowds](/images/pexels-photo-1112107.jpeg)
 Photo by Jamie McInall from Pexels
 
-Week one of the Metis Data Science saw us wade neck deep into analyzing data - in its full glory, and I kid you not - it was messy! But the final outcome was something, which as a rank newcomer - I was proud of!
+Week one of the [Metis Data Science Bootcamp](https://www.thisismetis.com/data-science-bootcamps) saw us wade neck deep into analyzing data - in its full glory, and I kid you not - it was messy! But the final outcome was something, which as a rank newcomer - I was proud of!
 
 This project was designed such that we would face the rigors of understanding the data, clean it and analyze it to come up with recommendations for a fictional client. Women Yes Women Tech (WYWT) International wanted us to analyze the [MTA Turnstile data](http://web.mta.info/developers/turnstile.html) to suggest where to place their street team of volunteers to maximize sign-ups for their cause and increase attendance in their summer gala.
 
