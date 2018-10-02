@@ -16,6 +16,6 @@ Currently, the healthcare industry offers a treasure trove of data in the form o
 
 Expert estimates peg the [health data analytics industry to touch $24 billion by the year 2020](http://fortune.com/2018/03/19/big-data-digital-health-tech/). And with good reason – such investments in the health care industry will decrease healthcare costs for the patient and improve overall well-being of the population as well! Besides, this will bode well for businesses too.
 
-It is evident from literature survey that supervised and unsupervised machine learning are widely popular and being applied to categorize the vast plethora of viruses and in grading tumors based on their molecular signatures. But this is just the beginning.
+It is evident from literature survey that supervised and unsupervised machine learning are widely popular and being applied to [categorize the vast plethora of viruses](https://www.nature.com/articles/d41586-018-03358-3) and in [grading tumors based on their molecular signatures](https://www.sciencedaily.com/releases/2018/09/180917111642.htm). But this is just the beginning.
 
 This data-driven transformation is not restricted to biology or the health care industry alone. The broad scope of inquiry using data – particularly continuous streams using IOT – will place data analysis as a sought-after skill set.
