@@ -6,9 +6,20 @@ title: How to mine a crowd..
 ![NYC crowds](/images/pexels-photo-1112107.jpeg)
 Photo by Jamie McInall from Pexels
 
-## NYC MTA turnstile data
-Hyde is a brazen two-column [Jekyll](http://jekyllrb.com) theme that pairs a prominent sidebar with uncomplicated content. It's based on [Poole](http://getpoole.com), the Jekyll butler.
+Week one of the Metis Data Science saw us wade neck deep into analyzing data - in its full glory, and I kid you not - it was messy! But the final outcome was something, which as a rank newcomer - I was proud of!
 
+This project was designed such that we would face the rigors of understanding the data, clean it and analyze it come up with recommendations for a fictional client. Women Yes Women Tech International wanted us to analyze the [MTA Turnstile data](http://web.mta.info/developers/turnstile.html) to suggest where to place their street team of volunteers to maximize sign-ups for their cause and increase attendance in their summer gala.
+
+Now, why MTA turnstile data, you may ask.
+
+### NYC MTA turnstile data
+
+>In 2016, average weekday subway ridership was 5.7 million, the highest since 1948. Annual ridership was 1.757 billion.
+[MTA info](http://web.mta.info/nyct/facts/ffsubway.htm)
+
+Given this ridership, it should come as no surprise that the data from the turnstiles - that register the traffic through the New York subway system at each entrance of each station every four hours - would be ideal for our analysis.
+
+Given that WYWT 
 ### Built on Poole
 
 Poole is the Jekyll Butler, serving as an upstanding and effective foundation for Jekyll themes by [@mdo](https://twitter.com/mdo). Poole, and every theme built on it (like Hyde here) includes the following:
