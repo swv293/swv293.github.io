@@ -4,7 +4,7 @@ title: Artificially Reimagining Healthcare
 ---
 ### My personal journey towards Data Science.
 
-![Image](/images/blog2/pexels-photo-267968.jpeg)
+![Image](/images/blog2/pexels-photo-1449054.jpeg)
 
 A Molecular Biologist and Biochemistry PhD by training, I have over a decade of research experience under my belt.
 
