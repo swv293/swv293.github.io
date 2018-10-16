@@ -65,7 +65,7 @@ This trend was evident in the correlation plot which also showed that the number
 * Selenium
 * Wordcloud
 
-Check out [my GitHub repo]() for more details regarding the project, codes and results!
+Check out [my GitHub repo](https://github.com/swv293/Project-Luther) for more details regarding the project, codes and results!
 
 ### Next Steps
 
