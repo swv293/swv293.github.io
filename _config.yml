@@ -1,5 +1,5 @@
 # Dependencies
-markdown:         redcarpet
+markdown:         kramdown
 highlighter:      rouge
 
 # Permalinks
@@ -14,6 +14,13 @@ baseurl:             /
 
 # Assets
 #
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - uglifier
+
+
 # We specify the directory for Jekyll so we can use @imports.
 sass:
   sass_dir:          _sass

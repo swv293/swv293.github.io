@@ -1,7 +1,21 @@
 <!DOCTYPE html>
 <html lang="en-us">
-
+  <head>
   {% include head.html %}
+  {% seo %}
+  <style>
+    {% include main.css %}
+  </style>
+
+  {% capture styles %}
+  {% include main.scss %}
+{% endcapture %}
+<style>{{ styles | scssify | strip }}</style>
+
+{% capture scripts %}
+  {% include main.js %}
+{% endcapture %}
+<script>{{ scripts | uglify | strip }}</script>
 
   <body class = "theme-base-08 layout-reverse">
 
@@ -12,4 +26,5 @@
     </div>
 
   </body>
+  </head>
 </html>
