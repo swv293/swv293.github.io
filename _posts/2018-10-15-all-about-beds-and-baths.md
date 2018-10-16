@@ -13,50 +13,49 @@ A quick check of the search trends for the Airbnb website [Google Trends](https:
 (*An aside: watch this space for a companion piece on time-series modeling of the Google trends data using Facebook's Prophet.*)
 
 <script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/1544_RC05/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"/m/0svqyn7","geo":"US","time":"today 5-y"},{"keyword":"/m/025ypk","geo":"US","time":"today 5-y"}],"category":0,"property":""}, {"exploreQuery":"date=today%205-y&geo=US&q=%2Fm%2F0svqyn7,%2Fm%2F025ypk","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>
+Google Trends data on the web searches for the Airbnb website for the past five years.
 
 So as a part of the second project in the [Metis Data Science Bootcamp](https://www.thisismetis.com/data-science-bootcamps?gclid=EAIaIQobChMI49W6ofuJ3gIVFY7ICh3aFg4QEAAYASAAEgJsevD_BwE), I worked on getting data about Airbnb listings in the Chicago area to try and predict what factors influence their pricing.
 
 ### Scraping the data
 
 >In 2017, three young entrepreneurs started what was at the time called Airbedandbreakfast.com. Since then, Airbnb has not only shortened its name, but has expanded to more than 34,000 cities and as of 2016, had been used by more than 60 million guests. The company is currently the second-highest valued startup in the U.S. at $31 billion.
+
 >[Business Insider](https://www.businessinsider.com/brian-chesky-airbnb-ceo-life-story-photos-2017-7#along-with-a-third-cofounder-nathan-blecharczyk-gebbia-and-chesky-started-what-was-at-the-time-called-airbedandbreakfastcom-8)
 
-The $31 billion kitty for Airbnb comes from their commission ranging from 3-12% depending on the listings.
+The $31 billion kitty for Airbnb comes from their commission ranging from 3-12% of the rental price depending on the listings. But, what features of the host's offering helps set the price of their rentals (and which features dont) was the main aim of my analysis.
 
-Given that WYWT would hold their gala in summer, we pulled out the turnstile data for the months preceding it, from March to May and used it for our analysis.
+To identify some of the features to model the price of the rental, i turned to what the host's thought were the top selling points of their offering that would entice a potential customer to choose them. I scrapped their descriptions and created a [wordcloud](https://github.com/amueller/word_cloud) to identify the most common features advertised.
 
-Based on our cleaned-up data (maybe I should go over how we did all that in another blog post?), we came up with a list of top stations with the highest footfalls. We focussed on the number of exits from any given station, as we inferred that people would be more amenable to chatting with volunteers at their destination.
+![wordcloud](images/blog3/name_wc.png)
+The most important features in the host's own words.
 
-![top stations](images/stations_by_exits.png)
-Top MTA stations based on the turnstile Data
+Interestingly, some of the main features that are highlighted here are the bedrooms of the rental offerings, which could be private rooms, apartments or condos, and entire houses. Another key selling points seems to be the location of the property.
 
-### The income angle
+Based on this analysis and a study of almost 51 different features offered by the host, I whittled the list down to 10 variables that could best predict the rental price using the Variance Inflation Factor (for an explanation of the VIF and how it was used to select features for predicting how drugs are prices, read the blog by the King of Scraping, [Charlie Yaris](https://cyaris.github.io/)).
 
-![distribution](images/Exit_map.png)
-GPS locations of the top MTA stations that we selected. Larger circles indicate more foot falls.
+### Is the price right?
 
-WYWT is looking to expand on its donor base through the street campaign, so we decided to add income data from Kaggle ([household income data](https://www.kaggle.com/goldenoakresearch/us-household-income-stats-geo-locations)), to supplement the footfall data and get more meaning into our analysis.
+![correlation plot](images/blog3/correlation_plot.png)
+10 best features used to predict the price of an Airbnb rental.
 
-We identified the zipcodes around our top stations and mapped the income distribution around these locations.
+The features and the price of the rental were fed into a linear regression model to see if they could predict the price of the rental. The resultant model was not one of the best, as the model scores (R^2, for the technical audience) indicated, but there were some interesting takeaways from the analysis.
 
-![income distribution](images/Income_map.png)
-GPS locations of the income distribution. Darker circles indicate higher incomes.
+Firstly, the number of bedrooms and baths clearly had the biggest influence on the price of the rental. For every bedroom offered, the host could charge $23 more per night. So, $46 for two bedrooms, $69 for three and so on. Add to it $10 more per bath added. As a result, entire homes and condos fared better than private rooms.
 
-We also devised a simple algorithm that mapped both footfall and income data into a single function, adding weights to each component so that we could tweak the recommendations towards either income heavy stations or footfall heavy stations, based on the client's preference. For more on that checkout my cohort-mate and project team member Tim Bowlings's blog [here](https://extraordinaryleastsquares.com/data-science/).
+![beds and baths](images/blog3/room_type_price.png)
+Entire homes pulled in a bigger share of rental prices compared to private rooms.
 
-![income and footfall](images/Rank_Map.png)
-GPS map of top ranked MTA Stations based on the combined income and turnstile data.
+Although the location of the rental seems to matter in the preliminary analysis, the model did not corroborate that observation. One possibility the median rental prices in a zipcode I used as a numerical proxy for the role of a location in rental pricing may not have been the best measure. However, I did get some interesting results about rentals along transit routes in Chicago, which will be the subject of another blog! So stay tuned!
 
-### Our recommendations
+### The curse of a review?
 
-* List of top fifty stations based on our combined income and footfall ranking system.
+Superhosts are hosts who have been offering up their homes for a considerable period of time, and have consistently earned good reviews. One would assume that these superhosts could demand a better price for their rental compared to normal hosts. But, that was not the case!
 
-* Mondays and Fridays are the best days for positioning street teams at the exits of the stations to maximize their impact as the ridership peaks on those days.
+![superhost](images/blog3/superhost_price.png)
+Highly reviewed superhosts do not earn more.
 
-![Exits and the day of the week](images/exits_week.png)
-The turnstile data was separated by the days of the week and aggregated over the entire period of 13 weeks to give rise to the distribution of exits over the days of the week for selected stations with the shadow being the 95% confidence interval around each line plot.
-
-Note: Wednesday traffic seem to be fluctuating more than any other day for the period we analyzed.
+This trend was evident in the correlation plot which also showed that the number of reviews a rental received did not track the price of that rental. However, why that would be the case, is still unclear.
 
 ### Tools used for the project
 
@@ -64,8 +63,9 @@ Note: Wednesday traffic seem to be fluctuating more than any other day for the p
 * Pandas dataframes
 * Beautiful Soup
 * Selenium
-* Folium
 * Wordcloud
+
+Check out [my GitHub repo]() for more details regarding the project, codes and results!
 
 ### Next Steps
 
@@ -73,11 +73,8 @@ Off to week four and classification problems with SQL! Keep an eye on this blog 
 
 ### Interesting Quotes
 
->"It has become appallingly obvious that our technology has exceeded our humanity."
-- Albert Einstein
+>"It has become appallingly obvious that our technology has exceeded our humanity."- Albert Einstein
 
->"Never trust a computer you can’t throw out a window."
-- Steve Wozniak
+>"Never trust a computer you can’t throw out a window."- Steve Wozniak
 
->"Simplicity is about subtracting the obvious and adding the meaningful."
-- John Maeda
+>"Simplicity is about subtracting the obvious and adding the meaningful."- John Maeda
