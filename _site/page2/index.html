@@ -10,9 +10,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
   <title>
-    
-      Swami Venkatesh &middot; Swami's Attempt At A Data Science Blog
-    
+
+    {% if page.title == "Home" %}
+      {{ site.title }} &middot; {{ site.tagline }}
+    {% else %}
+      {{ page.title }} &middot; {{ site.title }}
+    {% endif %}
+
   </title>
 
   <!-- CSS -->
@@ -46,36 +50,36 @@
     <nav class="sidebar-nav">
       <a class="sidebar-nav-item" href="/">Home</a>
 
-      
 
-      
-      
-        
-          
-        
-      
-        
-          
+
+
+
+
+
+
+
+
+
             <a class="sidebar-nav-item" href="/about/">About</a>
-          
-        
-      
-        
-      
-        
-          
-        
-      
-        
-      
-        
-          
-        
-      
-        
-          
-        
-      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       <a class="sidebar-nav-item" href="https://github.com/swv293">GitHub project</a>
       <span class="sidebar-nav-item">Currently v2.0.0</span>
@@ -88,7 +92,7 @@
 
     <div class="content container">
       <div class="posts">
-  
+
   <div class="post">
     <h1 class="post-title">
       <a href="/2013/12/28/introducing-hyde/">
@@ -136,7 +140,7 @@
 <p>Thanks!</p>
 
   </div>
-  
+
   <div class="post">
     <h1 class="post-title">
       <a href="/2012/02/07/example-content/">
@@ -289,18 +293,18 @@
 <p>Want to see something else added? <a href="https://github.com/poole/poole/issues/new">Open an issue.</a></p>
 
   </div>
-  
+
 </div>
 
 <div class="pagination">
-  
+
     <a class="pagination-item older" href="/page3">Older</a>
-  
-  
-    
+
+
+
       <a class="pagination-item newer" href="/">Newer</a>
-    
-  
+
+
 </div>
     </div>
 
