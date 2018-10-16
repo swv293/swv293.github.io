@@ -36,7 +36,7 @@ Based on this analysis and a study of almost 51 different features offered by th
 
 ### Is the price right?
 
-![correlation plot](images/blog3/correlation_plot.png)
+![correlationplot](images/blog3/correlation_plot.png)
 10 best features used to predict the price of an Airbnb rental.
 
 The features and the price of the rental were fed into a linear regression model to see if they could predict the price of the rental. The resultant model was not one of the best, as the model scores (R^2, for the technical audience) indicated, but there were some interesting takeaways from the analysis.
