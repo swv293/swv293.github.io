@@ -19,7 +19,7 @@ So as a part of the second project in the [Metis Data Science Bootcamp](https://
 
 ### Scraping the data
 
->In 2017, three young entrepreneurs started what was at the time called Airbedandbreakfast.com. Since then, Airbnb has not only shortened its name, but has expanded to more than 34,000 cities and as of 2016, had been used by more than 60 million guests. The company is currently the second-highest valued startup in the U.S. at $31 billion.
+>In 2007, three young entrepreneurs started what was at the time called Airbedandbreakfast.com. Since then, Airbnb has not only shortened its name, but has expanded to more than 34,000 cities and as of 2016, had been used by more than 60 million guests. The company is currently the second-highest valued startup in the U.S. at $31 billion.
 
 >[Business Insider](https://www.businessinsider.com/brian-chesky-airbnb-ceo-life-story-photos-2017-7#along-with-a-third-cofounder-nathan-blecharczyk-gebbia-and-chesky-started-what-was-at-the-time-called-airbedandbreakfastcom-8)
 
