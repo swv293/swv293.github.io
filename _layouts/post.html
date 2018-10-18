@@ -1,13 +1,13 @@
 ---
 layout: default
 ---
-<li>
-  <h1 class="post-title">{{ post.title }}</h1>
-  <p class="meta">{{ post.date | date_to_string }}</span>
 <div class="post">
+  <h1 class="post-title">{{ post.title }}</h1>
+  <p class="meta">{{ post.date | date_to_string }}</p>
+
     {{ post.content }}
 </div>
-</li>
+
 <div class="related">
   <h2>Related Posts</h2>
   <ul class="related-posts">
