@@ -4,13 +4,111 @@
  <title>Swami Venkatesh</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-10-02T07:52:29-05:00</updated>
+ <updated>2018-11-19T17:35:46-06:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Swami Venkatesh</name>
    <email>vswami101@yahoo.com</email>
  </author>
 
+ 
+ <entry>
+   <title>All about the Beds and Baths</title>
+   <link href="http://localhost:4000/2018/10/15/all-about-beds-and-baths/"/>
+   <updated>2018-10-15T00:00:00-05:00</updated>
+   <id>http://localhost:4000/2018/10/15/all-about-beds-and-baths</id>
+   <content type="html">&lt;h3 id=&quot;determining-the-price-of-an-airbnb-rental-in-chicago-and-the-factors-that-influence-it&quot;&gt;Determining the price of an Airbnb rental in Chicago and the factors that influence it&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/images/blog3/pexels-photo-276724.jpeg&quot; alt=&quot;Airbnb&quot; /&gt;
+Photo from Pexels&lt;/p&gt;
+
+&lt;p&gt;Airbnb has been growing in popularity over the years - to a point now - where it has emerged as a viable alternative to hotels. It is especially alluring to travelers who are looking for cheaper yet comfortable accommodations - while looking to experience a distinct local flavor. And the popularity shows.&lt;/p&gt;
+
+&lt;p&gt;A quick check of the search trends for the Airbnb website &lt;a href=&quot;https://trends.google.com/trends/?geo=US&quot;&gt;Google Trends&lt;/a&gt; shows a steady increase in its popularity over the past five years.&lt;/p&gt;
+
+&lt;p&gt;(&lt;em&gt;An aside: watch this space for a companion piece on time-series modeling of the Google trends data using Facebook’s Prophet.&lt;/em&gt;)&lt;/p&gt;
+
+&lt;script type=&quot;text/javascript&quot; src=&quot;https://ssl.gstatic.com/trends_nrtr/1544_RC05/embed_loader.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt; trends.embed.renderExploreWidget(&quot;TIMESERIES&quot;, {&quot;comparisonItem&quot;:[{&quot;keyword&quot;:&quot;/m/0svqyn7&quot;,&quot;geo&quot;:&quot;US&quot;,&quot;time&quot;:&quot;today 5-y&quot;},{&quot;keyword&quot;:&quot;/m/025ypk&quot;,&quot;geo&quot;:&quot;US&quot;,&quot;time&quot;:&quot;today 5-y&quot;}],&quot;category&quot;:0,&quot;property&quot;:&quot;&quot;}, {&quot;exploreQuery&quot;:&quot;date=today%205-y&amp;geo=US&amp;q=%2Fm%2F0svqyn7,%2Fm%2F025ypk&quot;,&quot;guestPath&quot;:&quot;https://trends.google.com:443/trends/embed/&quot;}); &lt;/script&gt;
+
+&lt;p&gt;Google Trends data on the web searches for the Airbnb website for the past five years.&lt;/p&gt;
+
+&lt;p&gt;So as a part of the second project in the &lt;a href=&quot;https://www.thisismetis.com/data-science-bootcamps?gclid=EAIaIQobChMI49W6ofuJ3gIVFY7ICh3aFg4QEAAYASAAEgJsevD_BwE&quot;&gt;Metis Data Science Bootcamp&lt;/a&gt;, I worked on getting data about Airbnb listings in the Chicago area to try and predict what factors influence their pricing.&lt;/p&gt;
+
+&lt;h3 id=&quot;scraping-the-data&quot;&gt;Scraping the data&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;In 2007, three young entrepreneurs started what was at the time called Airbedandbreakfast.com. Since then, Airbnb has not only shortened its name, but has expanded to more than 34,000 cities and as of 2016, had been used by more than 60 million guests. The company is currently the second-highest valued startup in the U.S. at $31 billion.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://www.businessinsider.com/brian-chesky-airbnb-ceo-life-story-photos-2017-7#along-with-a-third-cofounder-nathan-blecharczyk-gebbia-and-chesky-started-what-was-at-the-time-called-airbedandbreakfastcom-8&quot;&gt;Business Insider&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The $31 billion kitty for Airbnb comes from their commission ranging from 3-12% of the rental price depending on the listings. But, what features of the host’s offering helps set the price of their rentals (and which features dont) was the main aim of my analysis.&lt;/p&gt;
+
+&lt;p&gt;To identify some of the features to model the price of the rental, i turned to what the host’s thought were the top selling points of their offering that would entice a potential customer to choose them. I scrapped their descriptions and created a &lt;a href=&quot;https://github.com/amueller/word_cloud&quot;&gt;wordcloud&lt;/a&gt; to identify the most common features advertised.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;images/blog3/name_wc.png&quot; alt=&quot;wordcloud&quot; /&gt;
+The most important features in the host’s own words.&lt;/p&gt;
+
+&lt;p&gt;Interestingly, some of the main features that are highlighted here are the bedrooms of the rental offerings, which could be private rooms, apartments or condos, and entire houses. Another key selling points seems to be the location of the property.&lt;/p&gt;
+
+&lt;p&gt;Based on this analysis and a study of almost 51 different features offered by the host, I whittled the list down to 10 variables that could best predict the rental price using the Variance Inflation Factor (for an explanation of the VIF and how it was used to select features for predicting how drugs are prices, read the blog by the King of Scraping, &lt;a href=&quot;https://cyaris.github.io/&quot;&gt;Charlie Yaris&lt;/a&gt;).&lt;/p&gt;
+
+&lt;h3 id=&quot;is-the-price-right&quot;&gt;Is the price right?&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;images/blog3/correlation_plot.png&quot; alt=&quot;correlationplot&quot; /&gt;
+10 best features used to predict the price of an Airbnb rental.&lt;/p&gt;
+
+&lt;p&gt;The features and the price of the rental were fed into a linear regression model to see if they could predict the price of the rental. The resultant model was not one of the best, as the model scores (R^2, for the technical audience) indicated, but there were some interesting takeaways from the analysis.&lt;/p&gt;
+
+&lt;p&gt;Firstly, the number of bedrooms and baths clearly had the biggest influence on the price of the rental. For every bedroom offered, the host could charge $23 more per night. So, $46 for two bedrooms, $69 for three and so on. Add to it $10 more per bath added. As a result, entire homes and condos fared better than private rooms.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;images/blog3/room_type_price.png&quot; alt=&quot;beds and baths&quot; /&gt;
+Entire homes pulled in a bigger share of rental prices compared to private rooms.&lt;/p&gt;
+
+&lt;p&gt;Although the location of the rental seems to matter in the preliminary analysis, the model did not corroborate that observation. One possibility the median rental prices in a zipcode I used as a numerical proxy for the role of a location in rental pricing may not have been the best measure. However, I did get some interesting results about rentals along transit routes in Chicago, which will be the subject of another blog! So stay tuned!&lt;/p&gt;
+
+&lt;h3 id=&quot;the-curse-of-a-review&quot;&gt;The curse of a review?&lt;/h3&gt;
+
+&lt;p&gt;Superhosts are hosts who have been offering up their homes for a considerable period of time, and have consistently earned good reviews. One would assume that these superhosts could demand a better price for their rental compared to normal hosts. But, that was not the case!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;images/blog3/superhost_price.png&quot; alt=&quot;superhost&quot; /&gt;
+Highly reviewed superhosts do not earn more.&lt;/p&gt;
+
+&lt;p&gt;This trend was evident in the correlation plot which also showed that the number of reviews a rental received did not track the price of that rental. However, why that would be the case, is still unclear.&lt;/p&gt;
+
+&lt;h3 id=&quot;tools-used-for-the-project&quot;&gt;Tools used for the project&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Python : for most of the cleaning and analysis&lt;/li&gt;
+  &lt;li&gt;Pandas dataframes&lt;/li&gt;
+  &lt;li&gt;Beautiful Soup&lt;/li&gt;
+  &lt;li&gt;Selenium&lt;/li&gt;
+  &lt;li&gt;Wordcloud&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Check out &lt;a href=&quot;https://github.com/swv293/Project-Luther&quot;&gt;my GitHub repo&lt;/a&gt; for more details regarding the project, codes and results!&lt;/p&gt;
+
+&lt;h3 id=&quot;next-steps&quot;&gt;Next Steps&lt;/h3&gt;
+
+&lt;p&gt;Off to week four and classification problems with SQL! Keep an eye on this blog for more updates in the coming weeks! I leave you with some interesting quotes from some truly learned people!&lt;/p&gt;
+
+&lt;h3 id=&quot;interesting-quotes&quot;&gt;Interesting Quotes&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“It has become appallingly obvious that our technology has exceeded our humanity.”- Albert Einstein&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“Never trust a computer you can’t throw out a window.”- Steve Wozniak&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“Simplicity is about subtracting the obvious and adding the meaningful.”- John Maeda&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+ </entry>
  
  <entry>
    <title>How to mine a crowd..</title>
@@ -58,7 +156,7 @@ GPS locations of the top MTA stations that we selected. Larger circles indicate 
 &lt;p&gt;&lt;img src=&quot;images/Income_map.png&quot; alt=&quot;income distribution&quot; /&gt;
 GPS locations of the income distribution. Darker circles indicate higher incomes.&lt;/p&gt;
 
-&lt;p&gt;We also devised a simple algorithm that mapped both footfall and income data into a single function, adding weights to each component so that we could tweak the recommendations towards either income heavy stations or footfall heavy stations, based on the client’s preference.&lt;/p&gt;
+&lt;p&gt;We also devised a simple algorithm that mapped both footfall and income data into a single function, adding weights to each component so that we could tweak the recommendations towards either income heavy stations or footfall heavy stations, based on the client’s preference. For more on that checkout my cohort-mate and project team member Tim Bowlings’s blog &lt;a href=&quot;https://extraordinaryleastsquares.com/data-science/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;images/Rank_Map.png&quot; alt=&quot;income and footfall&quot; /&gt;
 GPS map of top ranked MTA Stations based on the combined income and turnstile data.&lt;/p&gt;
@@ -78,6 +176,17 @@ GPS map of top ranked MTA Stations based on the combined income and turnstile da
 The turnstile data was separated by the days of the week and aggregated over the entire period of 13 weeks to give rise to the distribution of exits over the days of the week for selected stations with the shadow being the 95% confidence interval around each line plot.&lt;/p&gt;
 
 &lt;p&gt;Note: Wednesday traffic seem to be fluctuating more than any other day for the period we analyzed.&lt;/p&gt;
+
+&lt;h3 id=&quot;tools-used-for-the-project&quot;&gt;Tools used for the project&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Python : for most of the cleaning and analysis&lt;/li&gt;
+  &lt;li&gt;Pandas dataframes&lt;/li&gt;
+  &lt;li&gt;Matplotlib&lt;/li&gt;
+  &lt;li&gt;Seaborn&lt;/li&gt;
+  &lt;li&gt;Tableau&lt;/li&gt;
+  &lt;li&gt;GeoPy&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h3 id=&quot;next-steps&quot;&gt;Next Steps&lt;/h3&gt;
 
@@ -106,6 +215,8 @@ The turnstile data was separated by the days of the week and aggregated over the
    <id>http://localhost:4000/2018/10/01/health-and-AI</id>
    <content type="html">&lt;h3 id=&quot;my-personal-journey-towards-data-science&quot;&gt;My personal journey towards Data Science.&lt;/h3&gt;
 
+&lt;p&gt;&lt;img src=&quot;/images/blog2/pexels-photo-1449054.jpeg&quot; alt=&quot;Image&quot; /&gt;&lt;/p&gt;
+
 &lt;p&gt;A Molecular Biologist and Biochemistry PhD by training, I have over a decade of research experience under my belt.&lt;/p&gt;
 
 &lt;p&gt;However, classical molecular biology has, in recent years, evolved technologically, to generate terabytes of digitized data – resulting from genomics and proteomics experiments.&lt;/p&gt;
@@ -118,219 +229,9 @@ The turnstile data was separated by the days of the week and aggregated over the
 
 &lt;p&gt;Expert estimates peg the &lt;a href=&quot;http://fortune.com/2018/03/19/big-data-digital-health-tech/&quot;&gt;health data analytics industry to touch $24 billion by the year 2020&lt;/a&gt;. And with good reason – such investments in the health care industry will decrease healthcare costs for the patient and improve overall well-being of the population as well! Besides, this will bode well for businesses too.&lt;/p&gt;
 
-&lt;p&gt;It is evident from literature survey that supervised and unsupervised machine learning are widely popular and being applied to &lt;a href=&quot;https://www.nature.com/articles/d41586-018-03358-3&quot;&gt;categorize the vast plethora of viruses&lt;/a&gt; and in &lt;a href=&quot;https://www.sciencedaily.com/releases/2018/09/180917111642.htm&quot;&gt;grading tumors based on their molecular signatures&lt;/a&gt;. But this is just the beginning.&lt;/p&gt;
+&lt;p&gt;It is evident from literature survey that supervised and unsupervised machine learning are widely popular and being applied to &lt;a href=&quot;https://www.nature.com/articles/d41586-018-03358-3/&quot;&gt;categorize the vast plethora of viruses&lt;/a&gt; and in &lt;a href=&quot;https://www.sciencedaily.com/releases/2018/09/180917111642.htm&quot;&gt;grading tumors based on their molecular signatures&lt;/a&gt;. But this is just the beginning.&lt;/p&gt;
 
 &lt;p&gt;This data-driven transformation is not restricted to biology or the health care industry alone. The broad scope of inquiry using data – particularly continuous streams using IOT – will place data analysis as a sought-after skill set.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Introducing Hyde</title>
-   <link href="http://localhost:4000/2013/12/28/introducing-hyde/"/>
-   <updated>2013-12-28T00:00:00-06:00</updated>
-   <id>http://localhost:4000/2013/12/28/introducing-hyde</id>
-   <content type="html">&lt;p&gt;Hyde is a brazen two-column &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll&lt;/a&gt; theme that pairs a prominent sidebar with uncomplicated content. It’s based on &lt;a href=&quot;http://getpoole.com&quot;&gt;Poole&lt;/a&gt;, the Jekyll butler.&lt;/p&gt;
-
-&lt;h3 id=&quot;built-on-poole&quot;&gt;Built on Poole&lt;/h3&gt;
-
-&lt;p&gt;Poole is the Jekyll Butler, serving as an upstanding and effective foundation for Jekyll themes by &lt;a href=&quot;https://twitter.com/mdo&quot;&gt;@mdo&lt;/a&gt;. Poole, and every theme built on it (like Hyde here) includes the following:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Complete Jekyll setup included (layouts, config, &lt;a href=&quot;/404&quot;&gt;404&lt;/a&gt;, &lt;a href=&quot;/atom.xml&quot;&gt;RSS feed&lt;/a&gt;, posts, and &lt;a href=&quot;/about&quot;&gt;example page&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Mobile friendly design and development&lt;/li&gt;
-  &lt;li&gt;Easily scalable text and component sizing with &lt;code class=&quot;highlighter-rouge&quot;&gt;rem&lt;/code&gt; units in the CSS&lt;/li&gt;
-  &lt;li&gt;Support for a wide gamut of HTML elements&lt;/li&gt;
-  &lt;li&gt;Related posts (time-based, because Jekyll) below each post&lt;/li&gt;
-  &lt;li&gt;Syntax highlighting, courtesy Pygments (the Python-based code snippet highlighter)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;hyde-features&quot;&gt;Hyde features&lt;/h3&gt;
-
-&lt;p&gt;In addition to the features of Poole, Hyde adds the following:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Sidebar includes support for textual modules and a dynamically generated navigation with active link support&lt;/li&gt;
-  &lt;li&gt;Two orientations for content and sidebar, default (left sidebar) and &lt;a href=&quot;https://github.com/poole/lanyon#reverse-layout&quot;&gt;reverse&lt;/a&gt; (right sidebar), available via &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;body&amp;gt;&lt;/code&gt; classes&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/poole/hyde#themes&quot;&gt;Eight optional color schemes&lt;/a&gt;, available via &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;body&amp;gt;&lt;/code&gt; classes&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/poole/hyde#readme&quot;&gt;Head to the readme&lt;/a&gt; to learn more.&lt;/p&gt;
-
-&lt;h3 id=&quot;browser-support&quot;&gt;Browser support&lt;/h3&gt;
-
-&lt;p&gt;Hyde is by preference a forward-thinking project. In addition to the latest versions of Chrome, Safari (mobile and desktop), and Firefox, it is only compatible with Internet Explorer 9 and above.&lt;/p&gt;
-
-&lt;h3 id=&quot;download&quot;&gt;Download&lt;/h3&gt;
-
-&lt;p&gt;Hyde is developed on and hosted with GitHub. Head to the &lt;a href=&quot;https://github.com/poole/hyde&quot;&gt;GitHub repository&lt;/a&gt; for downloads, bug reports, and features requests.&lt;/p&gt;
-
-&lt;p&gt;Thanks!&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Example content</title>
-   <link href="http://localhost:4000/2012/02/07/example-content/"/>
-   <updated>2012-02-07T00:00:00-06:00</updated>
-   <id>http://localhost:4000/2012/02/07/example-content</id>
-   <content type="html">&lt;div class=&quot;message&quot;&gt;
-  Howdy! This is an example blog post that shows several types of HTML content supported in this theme.
-&lt;/div&gt;
-
-&lt;p&gt;Cum sociis natoque penatibus et magnis &lt;a href=&quot;#&quot;&gt;dis parturient montes&lt;/a&gt;, nascetur ridiculus mus. &lt;em&gt;Aenean eu leo quam.&lt;/em&gt; Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Curabitur blandit tempus porttitor. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Etiam porta &lt;strong&gt;sem malesuada magna&lt;/strong&gt; mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.&lt;/p&gt;
-
-&lt;h2 id=&quot;inline-html-elements&quot;&gt;Inline HTML elements&lt;/h2&gt;
-
-&lt;p&gt;HTML defines a long list of available inline tags, a complete list of which can be found on the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTML/Element&quot;&gt;Mozilla Developer Network&lt;/a&gt;.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;To bold text&lt;/strong&gt;, use &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;strong&amp;gt;&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;To italicize text&lt;/em&gt;, use &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;em&amp;gt;&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Abbreviations, like &lt;abbr title=&quot;HyperText Markup Langage&quot;&gt;HTML&lt;/abbr&gt; should use &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;abbr&amp;gt;&lt;/code&gt;, with an optional &lt;code class=&quot;highlighter-rouge&quot;&gt;title&lt;/code&gt; attribute for the full phrase.&lt;/li&gt;
-  &lt;li&gt;Citations, like &lt;cite&gt;— Mark otto&lt;/cite&gt;, should use &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;cite&amp;gt;&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;del&gt;Deleted&lt;/del&gt; text should use &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;del&amp;gt;&lt;/code&gt; and &lt;ins&gt;inserted&lt;/ins&gt; text should use &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;ins&amp;gt;&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Superscript &lt;sup&gt;text&lt;/sup&gt; uses &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;sup&amp;gt;&lt;/code&gt; and subscript &lt;sub&gt;text&lt;/sub&gt; uses &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;sub&amp;gt;&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Most of these elements are styled by browsers with few modifications on our part.&lt;/p&gt;
-
-&lt;h2 id=&quot;heading&quot;&gt;Heading&lt;/h2&gt;
-
-&lt;p&gt;Vivamus sagittis lacus vel augue rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.&lt;/p&gt;
-
-&lt;h3 id=&quot;code&quot;&gt;Code&lt;/h3&gt;
-
-&lt;p&gt;Cum sociis natoque penatibus et magnis dis &lt;code class=&quot;highlighter-rouge&quot;&gt;code element&lt;/code&gt; montes, nascetur ridiculus mus.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// Example can be run directly in your JavaScript console
-&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// Create a function that takes two arguments and returns the sum of those arguments
-&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;adder&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;return a + b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// Call the function
-&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;adder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// &amp;gt; 8&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.&lt;/p&gt;
-
-&lt;h3 id=&quot;gists-via-github-pages&quot;&gt;Gists via GitHub Pages&lt;/h3&gt;
-
-&lt;p&gt;Vestibulum id ligula porta felis euismod semper. Nullam quis risus eget urna mollis ornare vel eu leo. Donec sed odio dui.&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/5555251.js?file=gist.md&quot;&gt; &lt;/script&gt;
-
-&lt;p&gt;Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec sed odio dui. Vestibulum id ligula porta felis euismod semper.&lt;/p&gt;
-
-&lt;h3 id=&quot;lists&quot;&gt;Lists&lt;/h3&gt;
-
-&lt;p&gt;Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Praesent commodo cursus magna, vel scelerisque nisl consectetur et.&lt;/li&gt;
-  &lt;li&gt;Donec id elit non mi porta gravida at eget metus.&lt;/li&gt;
-  &lt;li&gt;Nulla vitae elit libero, a pharetra augue.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Vestibulum id ligula porta felis euismod semper.&lt;/li&gt;
-  &lt;li&gt;Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.&lt;/li&gt;
-  &lt;li&gt;Maecenas sed diam eget risus varius blandit sit amet non magna.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at lobortis.&lt;/p&gt;
-
-&lt;dl&gt;
-  &lt;dt&gt;HyperText Markup Language (HTML)&lt;/dt&gt;
-  &lt;dd&gt;The language used to describe and define the content of a Web page&lt;/dd&gt;
-
-  &lt;dt&gt;Cascading Style Sheets (CSS)&lt;/dt&gt;
-  &lt;dd&gt;Used to describe the appearance of Web content&lt;/dd&gt;
-
-  &lt;dt&gt;JavaScript (JS)&lt;/dt&gt;
-  &lt;dd&gt;The programming language used to build advanced Web sites and applications&lt;/dd&gt;
-&lt;/dl&gt;
-
-&lt;p&gt;Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam quis risus eget urna mollis ornare vel eu leo.&lt;/p&gt;
-
-&lt;h3 id=&quot;images&quot;&gt;Images&lt;/h3&gt;
-
-&lt;p&gt;Quisque consequat sapien eget quam rhoncus, sit amet laoreet diam tempus. Aliquam aliquam metus erat, a pulvinar turpis suscipit at.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://placehold.it/800x400&quot; alt=&quot;placeholder&quot; title=&quot;Large example image&quot; /&gt;
-&lt;img src=&quot;http://placehold.it/400x200&quot; alt=&quot;placeholder&quot; title=&quot;Medium example image&quot; /&gt;
-&lt;img src=&quot;http://placehold.it/200x200&quot; alt=&quot;placeholder&quot; title=&quot;Small example image&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;tables&quot;&gt;Tables&lt;/h3&gt;
-
-&lt;p&gt;Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Upvotes&lt;/th&gt;
-      &lt;th&gt;Downvotes&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tfoot&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Totals&lt;/td&gt;
-      &lt;td&gt;21&lt;/td&gt;
-      &lt;td&gt;23&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tfoot&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Alice&lt;/td&gt;
-      &lt;td&gt;10&lt;/td&gt;
-      &lt;td&gt;11&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Bob&lt;/td&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Charlie&lt;/td&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;9&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;Nullam id dolor id nibh ultricies vehicula ut id elit. Sed posuere consectetur est at lobortis. Nullam quis risus eget urna mollis ornare vel eu leo.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Want to see something else added? &lt;a href=&quot;https://github.com/poole/poole/issues/new&quot;&gt;Open an issue.&lt;/a&gt;&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>What's Jekyll?</title>
-   <link href="http://localhost:4000/2012/02/06/whats-jekyll/"/>
-   <updated>2012-02-06T00:00:00-06:00</updated>
-   <id>http://localhost:4000/2012/02/06/whats-jekyll</id>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll&lt;/a&gt; is a static site generator, an open-source tool for creating simple yet powerful websites of all shapes and sizes. From &lt;a href=&quot;https://github.com/mojombo/jekyll/blob/master/README.markdown&quot;&gt;the project’s readme&lt;/a&gt;:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Jekyll is a simple, blog aware, static site generator. It takes a template directory […] and spits out a complete, static website suitable for serving with Apache or your favorite web server. This is also the engine behind GitHub Pages, which you can use to host your project’s page or blog right here from GitHub.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;It’s an immensely useful tool and one we encourage you to use here with Hyde.&lt;/p&gt;
-
-&lt;p&gt;Find out more by &lt;a href=&quot;https://github.com/mojombo/jekyll&quot;&gt;visiting the project on GitHub&lt;/a&gt;.&lt;/p&gt;
 </content>
  </entry>
  

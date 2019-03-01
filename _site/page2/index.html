@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-
+  <head>
   <head>
   <link href="http://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,13 +10,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
   <title>
-
-    {% if page.title == "Home" %}
-      {{ site.title }} &middot; {{ site.tagline }}
-    {% else %}
-      {{ page.title }} &middot; {{ site.title }}
-    {% endif %}
-
+    
+      Swami Venkatesh &middot; Swami's Attempt At A Data Science Blog
+    
   </title>
 
   <!-- CSS -->
@@ -32,6 +28,21 @@
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
 </head>
+
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Page 2 of 2 for Home | Swami Venkatesh</title>
+<meta name="generator" content="Jekyll v3.7.4" />
+<meta property="og:title" content="Home" />
+<meta name="author" content="Swami Venkatesh" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/page2/" />
+<meta property="og:url" content="http://localhost:4000/page2/" />
+<meta property="og:site_name" content="Swami Venkatesh" />
+<link rel="prev" href="http://localhost:4000/" />
+<script type="application/ld+json">
+{"headline":"Home","author":{"@type":"Person","name":"Swami Venkatesh"},"@type":"WebPage","url":"http://localhost:4000/page2/","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
 
   <body class = "theme-base-08 layout-reverse">
 
@@ -49,7 +60,34 @@
     <nav class="sidebar-nav">
       <a class="sidebar-nav-item" href="/">Home</a>
 
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
             <a class="sidebar-nav-item" href="/about/">About</a>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+          
+        
+      
 
       <a class="sidebar-nav-item" href="https://github.com/swv293">GitHub project</a>
       <span class="sidebar-nav-item">Currently v2.0.0</span>
@@ -58,3 +96,263 @@
     <p>&copy; 2018. All rights reserved.</p>
   </div>
 </div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="/js/infinite-jekyll.js"></script>
+    <div class="content container">
+      <div class="posts">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2018/10/15/all-about-beds-and-baths/">
+        All about the Beds and Baths
+      </a>
+    </h1>
+
+    <span class="post-date">15 Oct 2018</span>
+
+    <h3 id="determining-the-price-of-an-airbnb-rental-in-chicago-and-the-factors-that-influence-it">Determining the price of an Airbnb rental in Chicago and the factors that influence it</h3>
+<p><img src="/images/blog3/pexels-photo-276724.jpeg" alt="Airbnb" />
+Photo from Pexels</p>
+
+<p>Airbnb has been growing in popularity over the years - to a point now - where it has emerged as a viable alternative to hotels. It is especially alluring to travelers who are looking for cheaper yet comfortable accommodations - while looking to experience a distinct local flavor. And the popularity shows.</p>
+
+<p>A quick check of the search trends for the Airbnb website <a href="https://trends.google.com/trends/?geo=US">Google Trends</a> shows a steady increase in its popularity over the past five years.</p>
+
+<p>(<em>An aside: watch this space for a companion piece on time-series modeling of the Google trends data using Facebook’s Prophet.</em>)</p>
+
+<script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/1544_RC05/embed_loader.js"></script>
+<script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"/m/0svqyn7","geo":"US","time":"today 5-y"},{"keyword":"/m/025ypk","geo":"US","time":"today 5-y"}],"category":0,"property":""}, {"exploreQuery":"date=today%205-y&geo=US&q=%2Fm%2F0svqyn7,%2Fm%2F025ypk","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>
+
+<p>Google Trends data on the web searches for the Airbnb website for the past five years.</p>
+
+<p>So as a part of the second project in the <a href="https://www.thisismetis.com/data-science-bootcamps?gclid=EAIaIQobChMI49W6ofuJ3gIVFY7ICh3aFg4QEAAYASAAEgJsevD_BwE">Metis Data Science Bootcamp</a>, I worked on getting data about Airbnb listings in the Chicago area to try and predict what factors influence their pricing.</p>
+
+<h3 id="scraping-the-data">Scraping the data</h3>
+
+<blockquote>
+  <p>In 2007, three young entrepreneurs started what was at the time called Airbedandbreakfast.com. Since then, Airbnb has not only shortened its name, but has expanded to more than 34,000 cities and as of 2016, had been used by more than 60 million guests. The company is currently the second-highest valued startup in the U.S. at $31 billion.</p>
+</blockquote>
+
+<blockquote>
+  <p><a href="https://www.businessinsider.com/brian-chesky-airbnb-ceo-life-story-photos-2017-7#along-with-a-third-cofounder-nathan-blecharczyk-gebbia-and-chesky-started-what-was-at-the-time-called-airbedandbreakfastcom-8">Business Insider</a></p>
+</blockquote>
+
+<p>The $31 billion kitty for Airbnb comes from their commission ranging from 3-12% of the rental price depending on the listings. But, what features of the host’s offering helps set the price of their rentals (and which features dont) was the main aim of my analysis.</p>
+
+<p>To identify some of the features to model the price of the rental, i turned to what the host’s thought were the top selling points of their offering that would entice a potential customer to choose them. I scrapped their descriptions and created a <a href="https://github.com/amueller/word_cloud">wordcloud</a> to identify the most common features advertised.</p>
+
+<p><img src="images/blog3/name_wc.png" alt="wordcloud" />
+The most important features in the host’s own words.</p>
+
+<p>Interestingly, some of the main features that are highlighted here are the bedrooms of the rental offerings, which could be private rooms, apartments or condos, and entire houses. Another key selling points seems to be the location of the property.</p>
+
+<p>Based on this analysis and a study of almost 51 different features offered by the host, I whittled the list down to 10 variables that could best predict the rental price using the Variance Inflation Factor (for an explanation of the VIF and how it was used to select features for predicting how drugs are prices, read the blog by the King of Scraping, <a href="https://cyaris.github.io/">Charlie Yaris</a>).</p>
+
+<h3 id="is-the-price-right">Is the price right?</h3>
+
+<p><img src="images/blog3/correlation_plot.png" alt="correlationplot" />
+10 best features used to predict the price of an Airbnb rental.</p>
+
+<p>The features and the price of the rental were fed into a linear regression model to see if they could predict the price of the rental. The resultant model was not one of the best, as the model scores (R^2, for the technical audience) indicated, but there were some interesting takeaways from the analysis.</p>
+
+<p>Firstly, the number of bedrooms and baths clearly had the biggest influence on the price of the rental. For every bedroom offered, the host could charge $23 more per night. So, $46 for two bedrooms, $69 for three and so on. Add to it $10 more per bath added. As a result, entire homes and condos fared better than private rooms.</p>
+
+<p><img src="images/blog3/room_type_price.png" alt="beds and baths" />
+Entire homes pulled in a bigger share of rental prices compared to private rooms.</p>
+
+<p>Although the location of the rental seems to matter in the preliminary analysis, the model did not corroborate that observation. One possibility the median rental prices in a zipcode I used as a numerical proxy for the role of a location in rental pricing may not have been the best measure. However, I did get some interesting results about rentals along transit routes in Chicago, which will be the subject of another blog! So stay tuned!</p>
+
+<h3 id="the-curse-of-a-review">The curse of a review?</h3>
+
+<p>Superhosts are hosts who have been offering up their homes for a considerable period of time, and have consistently earned good reviews. One would assume that these superhosts could demand a better price for their rental compared to normal hosts. But, that was not the case!</p>
+
+<p><img src="images/blog3/superhost_price.png" alt="superhost" />
+Highly reviewed superhosts do not earn more.</p>
+
+<p>This trend was evident in the correlation plot which also showed that the number of reviews a rental received did not track the price of that rental. However, why that would be the case, is still unclear.</p>
+
+<h3 id="tools-used-for-the-project">Tools used for the project</h3>
+
+<ul>
+  <li>Python : for most of the cleaning and analysis</li>
+  <li>Pandas dataframes</li>
+  <li>Beautiful Soup</li>
+  <li>Selenium</li>
+  <li>Wordcloud</li>
+</ul>
+
+<p>Check out <a href="https://github.com/swv293/Project-Luther">my GitHub repo</a> for more details regarding the project, codes and results!</p>
+
+<h3 id="next-steps">Next Steps</h3>
+
+<p>Off to week four and classification problems with SQL! Keep an eye on this blog for more updates in the coming weeks! I leave you with some interesting quotes from some truly learned people!</p>
+
+<h3 id="interesting-quotes">Interesting Quotes</h3>
+
+<blockquote>
+  <p>“It has become appallingly obvious that our technology has exceeded our humanity.”- Albert Einstein</p>
+</blockquote>
+
+<blockquote>
+  <p>“Never trust a computer you can’t throw out a window.”- Steve Wozniak</p>
+</blockquote>
+
+<blockquote>
+  <p>“Simplicity is about subtracting the obvious and adding the meaningful.”- John Maeda</p>
+</blockquote>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2018/10/01/how-to-mine-a-crowd/">
+        How to mine a crowd..
+      </a>
+    </h1>
+
+    <span class="post-date">01 Oct 2018</span>
+
+    <h3 id="takaways-from-exploratory-data-analysis-using-nyc-mta-turnstile-data">Takaways from Exploratory Data Analysis using NYC MTA Turnstile data</h3>
+<p><img src="/images/pexels-photo-1112107.jpeg" alt="NYC crowds" />
+Photo by Jamie McInall from Pexels</p>
+
+<p>Week one of the <a href="https://www.thisismetis.com/data-science-bootcamps">Metis Data Science Bootcamp</a> saw us wade neck deep into analyzing data - in its full glory, and I kid you not - it was messy! But the final outcome was something, which as a rank newcomer - I was proud of!</p>
+
+<p>This project was designed such that we would face the rigors of understanding the data, clean it and analyze it to come up with recommendations for a fictional client. Women Yes Women Tech (WYWT) International wanted us to analyze the <a href="http://web.mta.info/developers/turnstile.html">MTA Turnstile data</a> to suggest where to place their street team of volunteers to maximize sign-ups for their cause and increase attendance in their summer gala.</p>
+
+<p>Now, why MTA turnstile data, you may ask.</p>
+
+<h3 id="nyc-mta-turnstile-data">NYC MTA turnstile data</h3>
+
+<blockquote>
+  <p>In 2016, average weekday subway ridership was 5.7 million, the highest since 1948. Annual ridership was 1.757 billion.</p>
+</blockquote>
+
+<blockquote>
+  <p><a href="http://web.mta.info/nyct/facts/ffsubway.htm">MTA info</a></p>
+</blockquote>
+
+<p>Given this ridership, it should come as no surprise that the data from the turnstiles - that register the traffic through the New York subway system at each entrance of each station every four hours - would be ideal for our analysis. Given the rather <a href="https://www.surveygizmo.com/resources/blog/survey-response-rates/">low response rates (10-12%) for external surveys</a>, identifying stations with the highest footfalls could yield a good conversion rate, i.e, more donors to WYWT’s cause.</p>
+
+<p>Given that WYWT would hold their gala in summer, we pulled out the turnstile data for the months preceding it, from March to May and used it for our analysis.</p>
+
+<p>Based on our cleaned-up data (maybe I should go over how we did all that in another blog post?), we came up with a list of top stations with the highest footfalls. We focussed on the number of exits from any given station, as we inferred that people would be more amenable to chatting with volunteers at their destination.</p>
+
+<p><img src="images/stations_by_exits.png" alt="top stations" />
+Top MTA stations based on the turnstile Data</p>
+
+<h3 id="the-income-angle">The income angle</h3>
+
+<p><img src="images/Exit_map.png" alt="distribution" />
+GPS locations of the top MTA stations that we selected. Larger circles indicate more foot falls.</p>
+
+<p>WYWT is looking to expand on its donor base through the street campaign, so we decided to add income data from Kaggle (<a href="https://www.kaggle.com/goldenoakresearch/us-household-income-stats-geo-locations">household income data</a>), to supplement the footfall data and get more meaning into our analysis.</p>
+
+<p>We identified the zipcodes around our top stations and mapped the income distribution around these locations.</p>
+
+<p><img src="images/Income_map.png" alt="income distribution" />
+GPS locations of the income distribution. Darker circles indicate higher incomes.</p>
+
+<p>We also devised a simple algorithm that mapped both footfall and income data into a single function, adding weights to each component so that we could tweak the recommendations towards either income heavy stations or footfall heavy stations, based on the client’s preference. For more on that checkout my cohort-mate and project team member Tim Bowlings’s blog <a href="https://extraordinaryleastsquares.com/data-science/">here</a>.</p>
+
+<p><img src="images/Rank_Map.png" alt="income and footfall" />
+GPS map of top ranked MTA Stations based on the combined income and turnstile data.</p>
+
+<h3 id="our-recommendations">Our recommendations</h3>
+
+<ul>
+  <li>
+    <p>List of top fifty stations based on our combined income and footfall ranking system.</p>
+  </li>
+  <li>
+    <p>Mondays and Fridays are the best days for positioning street teams at the exits of the stations to maximize their impact as the ridership peaks on those days.</p>
+  </li>
+</ul>
+
+<p><img src="images/exits_week.png" alt="Exits and the day of the week" />
+The turnstile data was separated by the days of the week and aggregated over the entire period of 13 weeks to give rise to the distribution of exits over the days of the week for selected stations with the shadow being the 95% confidence interval around each line plot.</p>
+
+<p>Note: Wednesday traffic seem to be fluctuating more than any other day for the period we analyzed.</p>
+
+<h3 id="tools-used-for-the-project">Tools used for the project</h3>
+
+<ul>
+  <li>Python : for most of the cleaning and analysis</li>
+  <li>Pandas dataframes</li>
+  <li>Matplotlib</li>
+  <li>Seaborn</li>
+  <li>Tableau</li>
+  <li>GeoPy</li>
+</ul>
+
+<h3 id="next-steps">Next Steps</h3>
+
+<p>Off to week two and web scraping! Keep an eye on this blog for more updates in the coming weeks! I leave you with some interesting quotes on data from some truly learned people!</p>
+
+<h3 id="interesting-quotes-on-data">Interesting Quotes on Data</h3>
+
+<blockquote>
+  <p>“It is a capital mistake to theorize before one has data.”- Arthur Conan Doyle, Author of Sherlock Holmes</p>
+</blockquote>
+
+<blockquote>
+  <p>“Torture the data, and it will confess to anything.” – Ronald Coase, winner of the Nobel Prize in Economics</p>
+</blockquote>
+
+<blockquote>
+  <p>The world is one big data problem.”- Andrew McAfee, MIT scientist</p>
+</blockquote>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2018/10/01/health-and-AI/">
+        Artificially Reimagining Healthcare
+      </a>
+    </h1>
+
+    <span class="post-date">01 Oct 2018</span>
+
+    <h3 id="my-personal-journey-towards-data-science">My personal journey towards Data Science.</h3>
+
+<p><img src="/images/blog2/pexels-photo-1449054.jpeg" alt="Image" /></p>
+
+<p>A Molecular Biologist and Biochemistry PhD by training, I have over a decade of research experience under my belt.</p>
+
+<p>However, classical molecular biology has, in recent years, evolved technologically, to generate terabytes of digitized data – resulting from genomics and proteomics experiments.</p>
+
+<p>About five years ago, I diversified from my core field into genomics and proteomics, which necessarily involved data analysis. I began learning the R language and using it to analyze data sets. My foray into data analysis led to my appreciation of the appeal and power of using R not just to operate on datasets popularly termed as ‘big data’, but to also extract meaningful, statistically-significant analysis.</p>
+
+<p>I published my research results in the journal <a href="https://www.nature.com/articles/nature11326">Nature</a>, and followed it up with another publication in <a href="https://www.nature.com/articles/ncomms13610">Nature Communications</a>. These experiences got me interested in learning how to harness the power of data analysis, particularly with the advent of AI techniques in understanding biological data.  And this is just data academic research.</p>
+
+<p>Currently, the healthcare industry offers a treasure trove of data in the form of patient database - measurements, images and diagnostic tests - that could amount to 80MB data per person each year. Add to it, fitness data from iPhones and fitbits, government websites (CDC and FDA), insurance claims and other health records – that is a mind-boggling amount of data to sift through, analyze and make sense of.</p>
+
+<p>Expert estimates peg the <a href="http://fortune.com/2018/03/19/big-data-digital-health-tech/">health data analytics industry to touch $24 billion by the year 2020</a>. And with good reason – such investments in the health care industry will decrease healthcare costs for the patient and improve overall well-being of the population as well! Besides, this will bode well for businesses too.</p>
+
+<p>It is evident from literature survey that supervised and unsupervised machine learning are widely popular and being applied to <a href="https://www.nature.com/articles/d41586-018-03358-3/">categorize the vast plethora of viruses</a> and in <a href="https://www.sciencedaily.com/releases/2018/09/180917111642.htm">grading tumors based on their molecular signatures</a>. But this is just the beginning.</p>
+
+<p>This data-driven transformation is not restricted to biology or the health care industry alone. The broad scope of inquiry using data – particularly continuous streams using IOT – will place data analysis as a sought-after skill set.</p>
+
+  </div>
+  
+</div>
+
+<div class="pagination">
+  
+    <span class="pagination-item older">Older</span>
+  
+  
+    
+      <a class="pagination-item newer" href="/">Newer</a>
+    
+  
+</div>
+<!--<div class="infinite-spinner"></div>-->
+
+    </div>
+
+  </body>
+  </head>
+</html>

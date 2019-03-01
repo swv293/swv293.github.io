@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      All about the Beds and Baths &middot; Swami Venkatesh
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>All about the Beds and Baths | Swami Venkatesh</title>
+<meta name="generator" content="Jekyll v3.7.4" />
+<meta property="og:title" content="All about the Beds and Baths" />
+<meta name="author" content="Swami Venkatesh" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Determining the price of an Airbnb rental in Chicago and the factors that influence it Photo from Pexels Airbnb has been growing in popularity over the years - to a point now - where it has emerged as a viable alternative to hotels. It is especially alluring to travelers who are looking for cheaper yet comfortable accommodations - while looking to experience a distinct local flavor. And the popularity shows. A quick check of the search trends for the Airbnb website Google Trends shows a steady increase in its popularity over the past five years. (An aside: watch this space for a companion piece on time-series modeling of the Google trends data using Facebook’s Prophet.) Google Trends data on the web searches for the Airbnb website for the past five years. So as a part of the second project in the Metis Data Science Bootcamp, I worked on getting data about Airbnb listings in the Chicago area to try and predict what factors influence their pricing. Scraping the data In 2007, three young entrepreneurs started what was at the time called Airbedandbreakfast.com. Since then, Airbnb has not only shortened its name, but has expanded to more than 34,000 cities and as of 2016, had been used by more than 60 million guests. The company is currently the second-highest valued startup in the U.S. at $31 billion. Business Insider The $31 billion kitty for Airbnb comes from their commission ranging from 3-12% of the rental price depending on the listings. But, what features of the host’s offering helps set the price of their rentals (and which features dont) was the main aim of my analysis. To identify some of the features to model the price of the rental, i turned to what the host’s thought were the top selling points of their offering that would entice a potential customer to choose them. I scrapped their descriptions and created a wordcloud to identify the most common features advertised. The most important features in the host’s own words. Interestingly, some of the main features that are highlighted here are the bedrooms of the rental offerings, which could be private rooms, apartments or condos, and entire houses. Another key selling points seems to be the location of the property. Based on this analysis and a study of almost 51 different features offered by the host, I whittled the list down to 10 variables that could best predict the rental price using the Variance Inflation Factor (for an explanation of the VIF and how it was used to select features for predicting how drugs are prices, read the blog by the King of Scraping, Charlie Yaris). Is the price right? 10 best features used to predict the price of an Airbnb rental. The features and the price of the rental were fed into a linear regression model to see if they could predict the price of the rental. The resultant model was not one of the best, as the model scores (R^2, for the technical audience) indicated, but there were some interesting takeaways from the analysis. Firstly, the number of bedrooms and baths clearly had the biggest influence on the price of the rental. For every bedroom offered, the host could charge $23 more per night. So, $46 for two bedrooms, $69 for three and so on. Add to it $10 more per bath added. As a result, entire homes and condos fared better than private rooms. Entire homes pulled in a bigger share of rental prices compared to private rooms. Although the location of the rental seems to matter in the preliminary analysis, the model did not corroborate that observation. One possibility the median rental prices in a zipcode I used as a numerical proxy for the role of a location in rental pricing may not have been the best measure. However, I did get some interesting results about rentals along transit routes in Chicago, which will be the subject of another blog! So stay tuned! The curse of a review? Superhosts are hosts who have been offering up their homes for a considerable period of time, and have consistently earned good reviews. One would assume that these superhosts could demand a better price for their rental compared to normal hosts. But, that was not the case! Highly reviewed superhosts do not earn more. This trend was evident in the correlation plot which also showed that the number of reviews a rental received did not track the price of that rental. However, why that would be the case, is still unclear. Tools used for the project Python : for most of the cleaning and analysis Pandas dataframes Beautiful Soup Selenium Wordcloud Check out my GitHub repo for more details regarding the project, codes and results! Next Steps Off to week four and classification problems with SQL! Keep an eye on this blog for more updates in the coming weeks! I leave you with some interesting quotes from some truly learned people! Interesting Quotes “It has become appallingly obvious that our technology has exceeded our humanity.”- Albert Einstein “Never trust a computer you can’t throw out a window.”- Steve Wozniak “Simplicity is about subtracting the obvious and adding the meaningful.”- John Maeda" />
+<meta property="og:description" content="Determining the price of an Airbnb rental in Chicago and the factors that influence it Photo from Pexels Airbnb has been growing in popularity over the years - to a point now - where it has emerged as a viable alternative to hotels. It is especially alluring to travelers who are looking for cheaper yet comfortable accommodations - while looking to experience a distinct local flavor. And the popularity shows. A quick check of the search trends for the Airbnb website Google Trends shows a steady increase in its popularity over the past five years. (An aside: watch this space for a companion piece on time-series modeling of the Google trends data using Facebook’s Prophet.) Google Trends data on the web searches for the Airbnb website for the past five years. So as a part of the second project in the Metis Data Science Bootcamp, I worked on getting data about Airbnb listings in the Chicago area to try and predict what factors influence their pricing. Scraping the data In 2007, three young entrepreneurs started what was at the time called Airbedandbreakfast.com. Since then, Airbnb has not only shortened its name, but has expanded to more than 34,000 cities and as of 2016, had been used by more than 60 million guests. The company is currently the second-highest valued startup in the U.S. at $31 billion. Business Insider The $31 billion kitty for Airbnb comes from their commission ranging from 3-12% of the rental price depending on the listings. But, what features of the host’s offering helps set the price of their rentals (and which features dont) was the main aim of my analysis. To identify some of the features to model the price of the rental, i turned to what the host’s thought were the top selling points of their offering that would entice a potential customer to choose them. I scrapped their descriptions and created a wordcloud to identify the most common features advertised. The most important features in the host’s own words. Interestingly, some of the main features that are highlighted here are the bedrooms of the rental offerings, which could be private rooms, apartments or condos, and entire houses. Another key selling points seems to be the location of the property. Based on this analysis and a study of almost 51 different features offered by the host, I whittled the list down to 10 variables that could best predict the rental price using the Variance Inflation Factor (for an explanation of the VIF and how it was used to select features for predicting how drugs are prices, read the blog by the King of Scraping, Charlie Yaris). Is the price right? 10 best features used to predict the price of an Airbnb rental. The features and the price of the rental were fed into a linear regression model to see if they could predict the price of the rental. The resultant model was not one of the best, as the model scores (R^2, for the technical audience) indicated, but there were some interesting takeaways from the analysis. Firstly, the number of bedrooms and baths clearly had the biggest influence on the price of the rental. For every bedroom offered, the host could charge $23 more per night. So, $46 for two bedrooms, $69 for three and so on. Add to it $10 more per bath added. As a result, entire homes and condos fared better than private rooms. Entire homes pulled in a bigger share of rental prices compared to private rooms. Although the location of the rental seems to matter in the preliminary analysis, the model did not corroborate that observation. One possibility the median rental prices in a zipcode I used as a numerical proxy for the role of a location in rental pricing may not have been the best measure. However, I did get some interesting results about rentals along transit routes in Chicago, which will be the subject of another blog! So stay tuned! The curse of a review? Superhosts are hosts who have been offering up their homes for a considerable period of time, and have consistently earned good reviews. One would assume that these superhosts could demand a better price for their rental compared to normal hosts. But, that was not the case! Highly reviewed superhosts do not earn more. This trend was evident in the correlation plot which also showed that the number of reviews a rental received did not track the price of that rental. However, why that would be the case, is still unclear. Tools used for the project Python : for most of the cleaning and analysis Pandas dataframes Beautiful Soup Selenium Wordcloud Check out my GitHub repo for more details regarding the project, codes and results! Next Steps Off to week four and classification problems with SQL! Keep an eye on this blog for more updates in the coming weeks! I leave you with some interesting quotes from some truly learned people! Interesting Quotes “It has become appallingly obvious that our technology has exceeded our humanity.”- Albert Einstein “Never trust a computer you can’t throw out a window.”- Steve Wozniak “Simplicity is about subtracting the obvious and adding the meaningful.”- John Maeda" />
+<link rel="canonical" href="http://localhost:4000/2018/10/15/all-about-beds-and-baths/" />
+<meta property="og:url" content="http://localhost:4000/2018/10/15/all-about-beds-and-baths/" />
+<meta property="og:site_name" content="Swami Venkatesh" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-10-15T00:00:00-05:00" />
+<script type="application/ld+json">
+{"headline":"All about the Beds and Baths","dateModified":"2018-10-15T00:00:00-05:00","datePublished":"2018-10-15T00:00:00-05:00","author":{"@type":"Person","name":"Swami Venkatesh"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2018/10/15/all-about-beds-and-baths/"},"description":"Determining the price of an Airbnb rental in Chicago and the factors that influence it Photo from Pexels Airbnb has been growing in popularity over the years - to a point now - where it has emerged as a viable alternative to hotels. It is especially alluring to travelers who are looking for cheaper yet comfortable accommodations - while looking to experience a distinct local flavor. And the popularity shows. A quick check of the search trends for the Airbnb website Google Trends shows a steady increase in its popularity over the past five years. (An aside: watch this space for a companion piece on time-series modeling of the Google trends data using Facebook’s Prophet.) Google Trends data on the web searches for the Airbnb website for the past five years. So as a part of the second project in the Metis Data Science Bootcamp, I worked on getting data about Airbnb listings in the Chicago area to try and predict what factors influence their pricing. Scraping the data In 2007, three young entrepreneurs started what was at the time called Airbedandbreakfast.com. Since then, Airbnb has not only shortened its name, but has expanded to more than 34,000 cities and as of 2016, had been used by more than 60 million guests. The company is currently the second-highest valued startup in the U.S. at $31 billion. Business Insider The $31 billion kitty for Airbnb comes from their commission ranging from 3-12% of the rental price depending on the listings. But, what features of the host’s offering helps set the price of their rentals (and which features dont) was the main aim of my analysis. To identify some of the features to model the price of the rental, i turned to what the host’s thought were the top selling points of their offering that would entice a potential customer to choose them. I scrapped their descriptions and created a wordcloud to identify the most common features advertised. The most important features in the host’s own words. Interestingly, some of the main features that are highlighted here are the bedrooms of the rental offerings, which could be private rooms, apartments or condos, and entire houses. Another key selling points seems to be the location of the property. Based on this analysis and a study of almost 51 different features offered by the host, I whittled the list down to 10 variables that could best predict the rental price using the Variance Inflation Factor (for an explanation of the VIF and how it was used to select features for predicting how drugs are prices, read the blog by the King of Scraping, Charlie Yaris). Is the price right? 10 best features used to predict the price of an Airbnb rental. The features and the price of the rental were fed into a linear regression model to see if they could predict the price of the rental. The resultant model was not one of the best, as the model scores (R^2, for the technical audience) indicated, but there were some interesting takeaways from the analysis. Firstly, the number of bedrooms and baths clearly had the biggest influence on the price of the rental. For every bedroom offered, the host could charge $23 more per night. So, $46 for two bedrooms, $69 for three and so on. Add to it $10 more per bath added. As a result, entire homes and condos fared better than private rooms. Entire homes pulled in a bigger share of rental prices compared to private rooms. Although the location of the rental seems to matter in the preliminary analysis, the model did not corroborate that observation. One possibility the median rental prices in a zipcode I used as a numerical proxy for the role of a location in rental pricing may not have been the best measure. However, I did get some interesting results about rentals along transit routes in Chicago, which will be the subject of another blog! So stay tuned! The curse of a review? Superhosts are hosts who have been offering up their homes for a considerable period of time, and have consistently earned good reviews. One would assume that these superhosts could demand a better price for their rental compared to normal hosts. But, that was not the case! Highly reviewed superhosts do not earn more. This trend was evident in the correlation plot which also showed that the number of reviews a rental received did not track the price of that rental. However, why that would be the case, is still unclear. Tools used for the project Python : for most of the cleaning and analysis Pandas dataframes Beautiful Soup Selenium Wordcloud Check out my GitHub repo for more details regarding the project, codes and results! Next Steps Off to week four and classification problems with SQL! Keep an eye on this blog for more updates in the coming weeks! I leave you with some interesting quotes from some truly learned people! Interesting Quotes “It has become appallingly obvious that our technology has exceeded our humanity.”- Albert Einstein “Never trust a computer you can’t throw out a window.”- Steve Wozniak “Simplicity is about subtracting the obvious and adding the meaningful.”- John Maeda","@type":"BlogPosting","url":"http://localhost:4000/2018/10/15/all-about-beds-and-baths/","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <body class = "theme-base-08 layout-reverse">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Swami Venkatesh
+        </a>
+      </h1>
+      <p class="lead"></p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">About</a>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+          
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/swv293">GitHub project</a>
+      <span class="sidebar-nav-item">Currently v2.0.0</span>
+    </nav>
+
+    <p>&copy; 2018. All rights reserved.</p>
+  </div>
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="/js/infinite-jekyll.js"></script>
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">All about the Beds and Baths</h1>
+  <span class="post-date">15 Oct 2018</span>
+  <h3 id="determining-the-price-of-an-airbnb-rental-in-chicago-and-the-factors-that-influence-it">Determining the price of an Airbnb rental in Chicago and the factors that influence it</h3>
+<p><img src="/images/blog3/pexels-photo-276724.jpeg" alt="Airbnb" />
+Photo from Pexels</p>
+
+<p>Airbnb has been growing in popularity over the years - to a point now - where it has emerged as a viable alternative to hotels. It is especially alluring to travelers who are looking for cheaper yet comfortable accommodations - while looking to experience a distinct local flavor. And the popularity shows.</p>
+
+<p>A quick check of the search trends for the Airbnb website <a href="https://trends.google.com/trends/?geo=US">Google Trends</a> shows a steady increase in its popularity over the past five years.</p>
+
+<p>(<em>An aside: watch this space for a companion piece on time-series modeling of the Google trends data using Facebook’s Prophet.</em>)</p>
+
+<script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/1544_RC05/embed_loader.js"></script>
+<script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"/m/0svqyn7","geo":"US","time":"today 5-y"},{"keyword":"/m/025ypk","geo":"US","time":"today 5-y"}],"category":0,"property":""}, {"exploreQuery":"date=today%205-y&geo=US&q=%2Fm%2F0svqyn7,%2Fm%2F025ypk","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>
+
+<p>Google Trends data on the web searches for the Airbnb website for the past five years.</p>
+
+<p>So as a part of the second project in the <a href="https://www.thisismetis.com/data-science-bootcamps?gclid=EAIaIQobChMI49W6ofuJ3gIVFY7ICh3aFg4QEAAYASAAEgJsevD_BwE">Metis Data Science Bootcamp</a>, I worked on getting data about Airbnb listings in the Chicago area to try and predict what factors influence their pricing.</p>
+
+<h3 id="scraping-the-data">Scraping the data</h3>
+
+<blockquote>
+  <p>In 2007, three young entrepreneurs started what was at the time called Airbedandbreakfast.com. Since then, Airbnb has not only shortened its name, but has expanded to more than 34,000 cities and as of 2016, had been used by more than 60 million guests. The company is currently the second-highest valued startup in the U.S. at $31 billion.</p>
+</blockquote>
+
+<blockquote>
+  <p><a href="https://www.businessinsider.com/brian-chesky-airbnb-ceo-life-story-photos-2017-7#along-with-a-third-cofounder-nathan-blecharczyk-gebbia-and-chesky-started-what-was-at-the-time-called-airbedandbreakfastcom-8">Business Insider</a></p>
+</blockquote>
+
+<p>The $31 billion kitty for Airbnb comes from their commission ranging from 3-12% of the rental price depending on the listings. But, what features of the host’s offering helps set the price of their rentals (and which features dont) was the main aim of my analysis.</p>
+
+<p>To identify some of the features to model the price of the rental, i turned to what the host’s thought were the top selling points of their offering that would entice a potential customer to choose them. I scrapped their descriptions and created a <a href="https://github.com/amueller/word_cloud">wordcloud</a> to identify the most common features advertised.</p>
+
+<p><img src="images/blog3/name_wc.png" alt="wordcloud" />
+The most important features in the host’s own words.</p>
+
+<p>Interestingly, some of the main features that are highlighted here are the bedrooms of the rental offerings, which could be private rooms, apartments or condos, and entire houses. Another key selling points seems to be the location of the property.</p>
+
+<p>Based on this analysis and a study of almost 51 different features offered by the host, I whittled the list down to 10 variables that could best predict the rental price using the Variance Inflation Factor (for an explanation of the VIF and how it was used to select features for predicting how drugs are prices, read the blog by the King of Scraping, <a href="https://cyaris.github.io/">Charlie Yaris</a>).</p>
+
+<h3 id="is-the-price-right">Is the price right?</h3>
+
+<p><img src="images/blog3/correlation_plot.png" alt="correlationplot" />
+10 best features used to predict the price of an Airbnb rental.</p>
+
+<p>The features and the price of the rental were fed into a linear regression model to see if they could predict the price of the rental. The resultant model was not one of the best, as the model scores (R^2, for the technical audience) indicated, but there were some interesting takeaways from the analysis.</p>
+
+<p>Firstly, the number of bedrooms and baths clearly had the biggest influence on the price of the rental. For every bedroom offered, the host could charge $23 more per night. So, $46 for two bedrooms, $69 for three and so on. Add to it $10 more per bath added. As a result, entire homes and condos fared better than private rooms.</p>
+
+<p><img src="images/blog3/room_type_price.png" alt="beds and baths" />
+Entire homes pulled in a bigger share of rental prices compared to private rooms.</p>
+
+<p>Although the location of the rental seems to matter in the preliminary analysis, the model did not corroborate that observation. One possibility the median rental prices in a zipcode I used as a numerical proxy for the role of a location in rental pricing may not have been the best measure. However, I did get some interesting results about rentals along transit routes in Chicago, which will be the subject of another blog! So stay tuned!</p>
+
+<h3 id="the-curse-of-a-review">The curse of a review?</h3>
+
+<p>Superhosts are hosts who have been offering up their homes for a considerable period of time, and have consistently earned good reviews. One would assume that these superhosts could demand a better price for their rental compared to normal hosts. But, that was not the case!</p>
+
+<p><img src="images/blog3/superhost_price.png" alt="superhost" />
+Highly reviewed superhosts do not earn more.</p>
+
+<p>This trend was evident in the correlation plot which also showed that the number of reviews a rental received did not track the price of that rental. However, why that would be the case, is still unclear.</p>
+
+<h3 id="tools-used-for-the-project">Tools used for the project</h3>
+
+<ul>
+  <li>Python : for most of the cleaning and analysis</li>
+  <li>Pandas dataframes</li>
+  <li>Beautiful Soup</li>
+  <li>Selenium</li>
+  <li>Wordcloud</li>
+</ul>
+
+<p>Check out <a href="https://github.com/swv293/Project-Luther">my GitHub repo</a> for more details regarding the project, codes and results!</p>
+
+<h3 id="next-steps">Next Steps</h3>
+
+<p>Off to week four and classification problems with SQL! Keep an eye on this blog for more updates in the coming weeks! I leave you with some interesting quotes from some truly learned people!</p>
+
+<h3 id="interesting-quotes">Interesting Quotes</h3>
+
+<blockquote>
+  <p>“It has become appallingly obvious that our technology has exceeded our humanity.”- Albert Einstein</p>
+</blockquote>
+
+<blockquote>
+  <p>“Never trust a computer you can’t throw out a window.”- Steve Wozniak</p>
+</blockquote>
+
+<blockquote>
+  <p>“Simplicity is about subtracting the obvious and adding the meaningful.”- John Maeda</p>
+</blockquote>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2018/10/01/how-to-mine-a-crowd/">
+            How to mine a crowd..
+            <small>01 Oct 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2018/10/01/health-and-AI/">
+            Artificially Reimagining Healthcare
+            <small>01 Oct 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+  </head>
+</html>
