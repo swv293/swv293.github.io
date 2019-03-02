@@ -36,24 +36,15 @@ So one of the crude ways to calculate the median for a field in SQL is to order 
 I have used the total amount in the orders table as an example to highlight. Here the crude SQL sample query:
 
 `SELECT AVG(totalamount) as median
-
-                    FROM
-
-                    (SELECT *
-
-                    FROM
-
-                    (SELECT totalamount
-
-                    FROM orders
-
-                    ORDER BY totalamount
-
-                    LIMIT 12000/2+1) as q1
-
-                    ORDER BY totalamount DESC
-
-                    LIMIT 2) as q2`
+FROM
+(SELECT *
+FROM
+(SELECT totalamount
+FROM orders
+ORDER BY totalamount
+LIMIT 12000/2+1) as q1
+ORDER BY totalamount DESC
+LIMIT 2) as q2`
 
 This gives us the median value of the amount purchased in every order - $219.54
 
@@ -64,17 +55,10 @@ PostGRESQL offers us a few other ways to calculate the median, of which we will 
 In a manner similar to the method used above, we can use the `OFFSET` method to omit a certain number of rows and `FETCH` the `NEXT` x rows. So for the median we omit the first 5999 rows and select the next 2 rows in case of an even number of rows (or next one in case of odd).
 
 `SELECT AVG(totalamount)
-
-FROM (
-
-    SELECT totalamount FROM orders
-
-     ORDER BY totalamount
-
-     OFFSET 5999 ROWS
-
-     FETCH NEXT 2 ROWS ONLY
-
+FROM (SELECT totalamount FROM orders
+ORDER BY totalamount
+OFFSET 5999 ROWS
+FETCH NEXT 2 ROWS ONLY
 ) AS x`
 
 #### `ROW_NUMBER`
@@ -82,21 +66,13 @@ FROM (
 This is an interesting approach where you create a subquery with the total amount, a field of row numbers for all rows in the ascending order and another for row numbers in the descending order. The main query selects the average of the fields where the ascending row number is between the corresponding value of the descending row number +/- 1. This would result in the selection of either the middle value for odd row numbers or the two middle rows for an even number of rows. The SQL query is listed below:
 
 `SELECT ROUND(AVG(totalamount), 2) as median_totalamount  
-
 FROM  
-
 (SELECT totalamount,
-
-      ROW_NUMBER() OVER (ORDER BY totalamount) AS rows_ascending,
-
-      ROW_NUMBER() OVER (ORDER BY totalamount DESC) AS rows_descending
-
-   FROM orders
-
-   WHERE totalamount <> 0
-
+ROW_NUMBER() OVER (ORDER BY totalamount) AS rows_ascending,
+ROW_NUMBER() OVER (ORDER BY totalamount DESC) AS rows_descending
+FROM orders
+WHERE totalamount <> 0
 ) AS x
-
 WHERE rows_ascending BETWEEN rows_descending - 1 AND rows_descending + 1`
 
 #### `PERCENTILE_CONT`
@@ -104,11 +80,8 @@ WHERE rows_ascending BETWEEN rows_descending - 1 AND rows_descending + 1`
 Introduced in SQL server version in 2012, and incorporated into PostgreSQL since 2014, this is a nifty way to calculate the median. It calculates the 50th percentile (which is the median), as a continuous function (the `_CONT` part). What that means is that it will interpolate in case there are multiple values. Now, `PERCENTILE_CONT` will calculate the median in the context of a grouping (the `WITHIN GROUP` part), which is used to order the list in an ascending manner. If there were further partitions that needed then you could use the window functions - `OVER` and `PARTITION`.
 
 `SELECT  
-
-  ROUND(PERCENTILE_CONT(0.50) WITHIN GROUP (ORDER BY totalamount)::numeric, 2)
-
-  AS median_totalamount
-
+ROUND(PERCENTILE_CONT(0.50) WITHIN GROUP (ORDER BY totalamount)::numeric, 2)
+AS median_totalamount
 FROM orders`
 
 In case you were wondering what the `::numeric` did - it is the same as `CAST` - it changes the data type to numeric so that `ROUND` can do its magic!
