@@ -68,11 +68,18 @@ This is an interesting approach where you create a subquery with the total amoun
 `SELECT ROUND(AVG(totalamount), 2) as median_totalamount`  
 `FROM`  
 `(SELECT totalamount,`
+
 `ROW_NUMBER() OVER (ORDER BY totalamount) AS rows_ascending,`
+
+
 `ROW_NUMBER() OVER (ORDER BY totalamount DESC) AS rows_descending`
+
 `FROM orders`
+
 `WHERE totalamount <> 0`
+
 `) AS x`
+
 `WHERE rows_ascending BETWEEN rows_descending - 1 AND rows_descending + 1`
 
 #### `PERCENTILE_CONT`
