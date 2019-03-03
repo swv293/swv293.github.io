@@ -65,15 +65,15 @@ FETCH NEXT 2 ROWS ONLY
 
 This is an interesting approach where you create a subquery with the total amount, a field of row numbers for all rows in the ascending order and another for row numbers in the descending order. The main query selects the average of the fields where the ascending row number is between the corresponding value of the descending row number +/- 1. This would result in the selection of either the middle value for odd row numbers or the two middle rows for an even number of rows. The SQL query is listed below:
 
-`SELECT ROUND(AVG(totalamount), 2) as median_totalamount  
-FROM  
-(SELECT totalamount,
-ROW_NUMBER() OVER (ORDER BY totalamount) AS rows_ascending,
-ROW_NUMBER() OVER (ORDER BY totalamount DESC) AS rows_descending
-FROM orders
-WHERE totalamount <> 0
-) AS x
-WHERE rows_ascending BETWEEN rows_descending - 1 AND rows_descending + 1`
+`SELECT ROUND(AVG(totalamount), 2) as median_totalamount`  
+`FROM`  
+`(SELECT totalamount,`
+`ROW_NUMBER() OVER (ORDER BY totalamount) AS rows_ascending,`
+`ROW_NUMBER() OVER (ORDER BY totalamount DESC) AS rows_descending`
+`FROM orders`
+`WHERE totalamount <> 0`
+`) AS x`
+`WHERE rows_ascending BETWEEN rows_descending - 1 AND rows_descending + 1`
 
 #### `PERCENTILE_CONT`
 
